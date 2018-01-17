@@ -2,7 +2,12 @@
 title: "Bio 381 Webpage"
 author: "Jorge Ruiz Arocho"
 date: "2018 M01 17"
-output: html_document
+output:
+  html_document:
+    df_print: paged
+  prettydoc::html_pretty:
+    highlight: github
+    theme: leonids
 ---
 
 ## Creates a title 
