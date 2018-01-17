@@ -127,6 +127,7 @@ $(document).ready(function () {
 
 <div id="creates-a-title" class="section level2">
 <h2>Creates a title</h2>
+<p><strong>bold</strong> <em>italic</em></p>
 </div>
 
 

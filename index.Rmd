@@ -7,3 +7,6 @@ output: html_document
 
 ## Creates a title 
 
+**bold**
+*italic*
+
