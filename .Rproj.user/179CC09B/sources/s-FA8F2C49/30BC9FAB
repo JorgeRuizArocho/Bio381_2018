@@ -5,13 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1436355752",
+    "hash" : "0",
     "id" : "30BC9FAB",
-    "lastKnownWriteTime" : 1516225022,
-    "last_content_update" : 1516225022,
+    "lastKnownWriteTime" : 1516226648,
+    "last_content_update" : 1516226648,
     "path" : "C:/Users/J RUIZ/Desktop/UVM - Grad/First Year - Second Semester - UVM/Computational Biology/Bio381_2018/index.html",
     "project_path" : "index.html",
     "properties" : {
+        "cursorPosition" : "0,0",
+        "scrollLine" : "0"
     },
     "relative_order" : 2,
     "source_on_save" : false,
