@@ -11,3 +11,25 @@ output:
 ## Jorge's Page
 
 <img src="Jorge.jpg" width="200" height="300" />
+
+## Helpful Links   
+* [Course Webpage](https://gotellilab.github.io/Bio381/)   
+* [RMarkdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)   
+* [Github website templates](https://github.com/jekyll/jekyll/wiki/Themes)   
+* [R help](http://stackoverflow.com/questions/tagged/r)   
+
+## Table of contents of Homework Assignments    
+* [Homework 1: ](#id-section1)
+* [Homework 2: ](#id-section2)
+* [Homework 3: ](#id-section3)
+* [Homework 4: ](#id-section4)
+* [Homework 5: ](#id-section5)
+* [Homework 6: ](#id-section6) 
+* [Homework 7: ](#id-section7)
+* [Homework 8: ](#id-section8)
+* [Homework 9: ](#id-section9)   
+* [Week 10: ](#id-section10)
+* [Week 11: ](#id-section11)
+
+
+## Homework Solutions and Notes
