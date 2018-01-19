@@ -18,7 +18,7 @@ Hey all!
 
 Welcome to my Webpage!
 
-My name is Jorge Alfonso Ruiz Arocho, I'm a master student at the PSS department and I'm interested on how humans shape environments and its effects on invertebrate communities. Currently, I'm working with crop domestication in Mexico and how this process has shaped the insects biodiversity associated with to multiple plant species.
+My name is Jorge Alfonso Ruiz-Arocho, I'm a master student at the PSS department and I'm interested on how humans shape environments and its effects on invertebrate communities. Currently, I'm working with crop domestication in Mexico and how this process has shaped the insects biodiversity associated with multiple plant species.
 
 The main purpose of this webpage is to document my progress in the Computational Biology class (Biol 381).
 
