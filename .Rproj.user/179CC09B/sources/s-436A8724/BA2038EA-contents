@@ -33,7 +33,7 @@ Have fun!
 ## Table of contents of Homework Assignments    
 * [Homework 1: Creation of webpages ](#id-section1)
 * [Homework 2: Diagrams made in Typora](#id-section2)
-* [Homework 3: ](#id-section3)
+* [Homework 3: RMarkdown Presentation](#id-section3)
 * [Homework 4: ](#id-section4)
 * [Homework 5: ](#id-section5)
 * [Homework 6: ](#id-section6) 
@@ -54,6 +54,12 @@ https://github.com/JorgeRuizArocho
 ## Homework 2
 
 [Homework 2 Link](Homework02.html)
+
+## Homework 3
+
+[Homework 3 Link](FirstPresentation.html)
+
+Clarification: I have been unable to knit to a .pdf file and I'm still unable to create images with a caption overlaid in .html. 
 
 
 
