@@ -35,7 +35,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 >- <div class="red2"> (WS: Cucurbita argyrosperma ssp. sororia, CS: Cucurbita argyrosperma ssp. argyrosperma) </div> 
 
-- Tomatillo
+-Tomatillo
 
 >- <div class="red2"> (WS: Physalis philadelphica, CS: Physalis philadelphica) </div>
 
