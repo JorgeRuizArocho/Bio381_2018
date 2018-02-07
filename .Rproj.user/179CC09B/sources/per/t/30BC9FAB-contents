@@ -68,7 +68,7 @@
 <li><a href="#id-section1">Homework 1: Creation of webpages</a></li>
 <li><a href="#id-section2">Homework 2: Diagrams made in Typora</a></li>
 <li><a href="#id-section3">Homework 3: RMarkdown Presentation</a></li>
-<li><a href="#id-section4">Homework 4:</a></li>
+<li><a href="#id-section4">Homework 4: Manipulation of data</a></li>
 <li><a href="#id-section5">Homework 5:</a></li>
 <li><a href="#id-section6">Homework 6:</a></li>
 <li><a href="#id-section7">Homework 7:</a></li>
@@ -95,6 +95,10 @@
 <h2>Homework 3</h2>
 <p><a href="FirstPresentation.html">Homework 3 Link</a></p>
 <p>Clarification: I have been unable to knit to a .pdf file and I’m still unable to create images with a caption overlaid in .html.</p>
+</div>
+<div id="homework-4" class="section level2">
+<h2>Homework 4</h2>
+<p><a href="Homework04.html">Homework 4 Link</a></p>
 </div>
 </section>
 
