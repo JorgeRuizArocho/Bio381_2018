@@ -35,7 +35,7 @@ Have fun!
 * [Homework 2: Diagrams made in Typora](#id-section2)
 * [Homework 3: RMarkdown Presentation](#id-section3)
 * [Homework 4: Manipulation of data](#id-section4)
-* [Homework 5: Reular Expressions](#id-section5)
+* [Homework 5: Regular Expressions](#id-section5)
 * [Homework 6: ](#id-section6) 
 * [Homework 7: ](#id-section7)
 * [Homework 8: ](#id-section8)
