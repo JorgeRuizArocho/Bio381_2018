@@ -1,0 +1,147 @@
+---
+title: "Homework 05"
+author: "Jorge Ruiz Arocho"
+date: "2018 M02 14"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+
+1)
+
+First String    Second      1.22      3.4  
+
+Second          More Text   1.555555  2.2220
+
+Third           x           3         124
+   
+```
+FIND: (\s* \s) 
+With this fucntion, I am telling the program to find each space in between columns, but not in between words. 
+
+REPLACE: , 
+Then, I replaceD those spaces with a ",". 
+```
+
+Result:
+
+First String,Second,1.22,3.4
+
+Second,More Text,1.555555,2.2220
+
+Third,x,3,124
+
+
+
+2) 
+
+Ballif, Bryan, University of Vermont
+
+Ellison, Aaron, Harvard Forest
+   
+Record, Sydne, Bryn Mawr
+
+```
+FIND: (\w*)\,\s(\w*)\,\s(.*) 
+With this fucntion, I am telling the program to find a full word follow by a comma follow by a space follow by a full word .... ending with the rest of the row. 
+
+REPLACE: \2 \1 (\(\3\) 
+I switch the first and second component and encapsule the third component between parenthesis. 
+
+```
+
+Result: 
+
+Bryan Ballif (University of Vermont)
+
+Aaron Ellison (Harvard Forest)
+
+Sydne Record (Bryn Mawr)
+
+
+3)
+
+0001 Georgia Horseshoe.mp3 0002 Billy In The Lowground.mp3 003 Cherokee Shuffle.mp3 0004 Walking Cane.mp3
+
+```
+FIND: mp3
+Here I am telling the program to find "mp3"
+
+REPLACE: mp3 \n
+And replace it with mp3 and a single line break
+```
+
+0001 Georgia Horseshoe.mp3 
+
+0002 Billy In The Lowground.mp3 
+
+003 Cherokee Shuffle.mp3 
+
+0004 Walking Cane.mp3
+
+```
+FIND: (\d{3,4})\s(.*).mp3
+Here I am looking for a number with 3 or 4 digits, a space and the rest of the row; ending with a mp3
+
+REPLACE: (\2_\1)\.mp3
+Here I am switching component 2 and 1 and adding .mp3 at the end. 
+```
+
+Result:
+
+Georgia Horseshoe_0001.mp3 
+
+Billy In The Lowground_0002.mp3 
+
+Cherokee Shuffle_003.mp3 
+
+Walking Cane_0004.mp3
+
+
+4)
+
+Camponotus,pennsylvanicus,10.2,44
+
+Camponotus,herculeanus,10.5,3
+
+Myrmica,punctiventris,12.2,4
+
+Lasius,neoniger,3.3,55
+
+```
+FIND: (\w)\w*,(\w*),(\d*\.\d*),(\d*)
+Here I am looking for the first letter of the first component, the second full word, the number including its decimal, and de last full number
+
+REPLACE: \1_\2,\4
+Here I replace the first word, only with its first letter, added a "_" follow by the second component, and finally the fourth component.
+```
+
+Result: 
+
+C_pennsylvanicus,44
+
+C_herculeanus,3
+
+M_punctiventris,4
+
+L_neoniger,55
+
+```
+FIND: (\w)\w*,(\w{4})\w*,(\d*\.\d*),(\d*)
+Here I am looking for the first letter of the first component, the first four letter of the second component, the number including its decimal, and de last full number
+
+REPLACE: \1_\2,\4
+Here I replace the first word, only with its first letter, added a "_" follow by the first four letter of the second component, and finally the fourth component.
+```
+
+Result: 
+
+C_penn,44
+
+C_herc,3
+
+M_punc,4
+
+L_neon,55

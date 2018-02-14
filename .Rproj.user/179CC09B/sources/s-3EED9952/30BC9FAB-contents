@@ -69,7 +69,7 @@
 <li><a href="#id-section2">Homework 2: Diagrams made in Typora</a></li>
 <li><a href="#id-section3">Homework 3: RMarkdown Presentation</a></li>
 <li><a href="#id-section4">Homework 4: Manipulation of data</a></li>
-<li><a href="#id-section5">Homework 5:</a></li>
+<li><a href="#id-section5">Homework 5: Reular Expressions</a></li>
 <li><a href="#id-section6">Homework 6:</a></li>
 <li><a href="#id-section7">Homework 7:</a></li>
 <li><a href="#id-section8">Homework 8:</a></li>
@@ -99,6 +99,10 @@
 <div id="homework-4" class="section level2">
 <h2>Homework 4</h2>
 <p><a href="Homework04.html">Homework 4 Link</a></p>
+</div>
+<div id="homework-5" class="section level2">
+<h2>Homework 5</h2>
+<p><a href="Homework05.html">Homework 5 Link</a></p>
 </div>
 </section>
 
