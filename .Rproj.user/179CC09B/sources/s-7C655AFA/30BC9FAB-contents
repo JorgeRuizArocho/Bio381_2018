@@ -70,7 +70,7 @@
 <li><a href="#id-section3">Homework 3: RMarkdown Presentation</a></li>
 <li><a href="#id-section4">Homework 4: Manipulation of data</a></li>
 <li><a href="#id-section5">Homework 5: Regular Expressions</a></li>
-<li><a href="#id-section6">Homework 6:</a></li>
+<li><a href="#id-section6">Homework 6: Probability Distributions</a></li>
 <li><a href="#id-section7">Homework 7:</a></li>
 <li><a href="#id-section8">Homework 8:</a></li>
 <li><a href="#id-section9">Homework 9:</a><br />
@@ -103,6 +103,10 @@
 <div id="homework-5" class="section level2">
 <h2>Homework 5</h2>
 <p><a href="Homework05.html">Homework 5 Link</a></p>
+</div>
+<div id="homework-6" class="section level2">
+<h2>Homework 6</h2>
+<p><a href="Homework06.html">Homework 6 Link</a></p>
 </div>
 </section>
 

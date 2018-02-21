@@ -1,0 +1,127 @@
+---
+title: "Homework06"
+author: "Jorge Ruiz Arocho"
+date: "2018 M02 21"
+output: html_document
+---
+
+```{r}
+z <- read.table("Fake Data Herbivory.csv",header=TRUE,sep=",", stringsAsFactors=FALSE)
+str(z) 
+summary(z)
+head(z) # Updloading my data and summarizing it 
+
+H <- as.data.frame(cbind(z$ï..ID, z$Total.Leaf.Area..cm2))
+head(H)
+names(H) <- c("ID", "LA")
+str(H)
+head(H)
+```
+
+```{r}
+library(ggplot2) # for graphics
+library(MASS) # for maximum likelihood estimation
+```
+
+```{r}
+p1 <- ggplot(data=H, aes(x=LA, y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",size=0.2) #Here I am assigning my data to a ggplot density graph 
+print(p1)
+```
+
+```{r}
+p1 <-  p1 +  geom_density(linetype="dotted",size=0.75) #Here I am adding an empirical density curve to broadly observe the distribution of our data 
+print(p1)
+```
+
+```{r}
+normPars <- fitdistr(H$LA,"normal") #Here I am fitting a normal distribution to my data and grabing the maximum likelihood estimators of the two parameters of a normal distribution.
+print(normPars)
+```
+
+```{r}
+str(normPars)
+```
+
+```{r}
+normPars$estimate["mean"]
+```
+
+```{r}
+meanML <- normPars$estimate["mean"]
+sdML <- normPars$estimate["sd"]
+
+xval <- seq(0,max(H$LA),len=length(H$LA))
+
+stat <- stat_function(aes(x = xval, y = ..y..), fun = dnorm, colour="red", n =length(H$LA), args = list(mean = meanML, sd = sdML)) # Plotting a normal probability curve on my data. 
+p1 + stat
+```
+
+```{r}
+expoPars <- fitdistr(H$LA,"exponential")
+rateML <- expoPars$estimate["rate"]
+
+stat2 <- stat_function(aes(x = xval, y = ..y..), fun = dexp, colour="blue", n = length(H$LA), args = list(rate=rateML)) # Plotting a exponential probability curve on my data. 
+p1 + stat + stat2 
+```
+
+```{r}
+stat3 <- stat_function(aes(x = xval, y = ..y..), fun = dunif, colour="darkgreen", n = length(H$LA), args = list(min=min(H$LA), max=max(H$LA))) # Plotting a uniform probability density plot on my data. 
+p1 + stat + stat2 + stat3
+```
+
+```{r}
+gammaPars <- fitdistr(H$LA,"gamma")
+shapeML <- gammaPars$estimate["shape"]
+rateML <- gammaPars$estimate["rate"]
+
+stat4 <- stat_function(aes(x = xval, y = ..y..), fun = dgamma, colour="brown", n = length(H$LA), args = list(shape=shapeML, rate=rateML)) # Plotting a gamma probability density plot on my data. 
+ p1 + stat + stat2 + stat3 + stat4
+```
+
+```{r}
+pSpecial <- ggplot(data=H, aes(x=LA/(max(LA + 0.1)), y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",size=0.2) + 
+  xlim(c(0,1)) +
+  geom_density(size=0.75,linetype="dotted")
+
+betaPars <- fitdistr(x=H$LA/max(H$LA + 0.1),start=list(shape1=1,shape2=2),"beta")
+shape1ML <- betaPars$estimate["shape1"]
+shape2ML <- betaPars$estimate["shape2"]
+
+statSpecial <- stat_function(aes(x = xval, y = ..y..), fun = dbeta, colour="orchid", n = length(H$LA), args = list(shape1=shape1ML,shape2=shape2ML))
+pSpecial + statSpecial # Plotting a beta probability density plot on my data, but on its own graph because the raw data must be rescaled so they are between 0 and 1, and then they can be compared to the beta.
+```
+
+
+1) Using the best-fitting distribution, go back to the code and get the maximum likelihood parameters. Use those to simulate a new data set, with the same length as your original vector, and plot that in a histogram and add the probability density curve. Right below that, generate a fresh histogram plot of the original data, and also include the probability density curve.
+
+How do the two histogram profiles compare? Do you think the model is doing a good job of simulating realistic data that match your original measurements? Why or why not?
+
+```{r}
+normPars$loglik # The normal distribution appears to be the appropiate one (Highest number)
+expoPars$loglik
+gammaPars$loglik
+```
+
+```{r}
+z <- rnorm(n=100,mean=17.0061000, sd= 2.6720142) # Here I am simulating data based on the previous mean, sd, and length of my original data. I used rnorm because the normal distribution fits better on my original data. 
+z <- data.frame(1: 100,z)
+names(z) <- list("ID","myVar")
+z <- z[z$myVar>0,]
+str(z)
+
+p2 <- ggplot(data=z, aes(x=myVar, y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",size=0.2) 
+p2 <-  p2 +  geom_density(linetype="dotted",size=0.75)
+print(p2)
+```
+
+```{r}
+p1 <- ggplot(data=H, aes(x=LA, y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",size=0.2) #Here I am assigning my data to a ggplot density graph 
+p1 <-  p1 +  geom_density(linetype="dotted",size=0.75) #Here I am adding an empirical density curve to broadly observe the distribution of our data 
+print(p1)
+```
+
+- The two histogram profiles are quite different, and based on our work the model is not doing a good job simulating a realistic data that match our original measurente. But, I am conscience on the fact that we are using/and simulating data with few obervations (n=100). I assume that once we start workin with a significantly high number of observations these models should do a better job simulating real data.  
