@@ -129,5 +129,5 @@ print(p1)
 ```
 
 
-- The two histogram profiles are quite different, and based on our work the model is an average job simulating a realistic data that match our original measurente. But, I am conscience on the fact that we are using/and simulating data with few obervations (n=100). I assume that once we start workin with a significantly high number of observations these models should do a better job simulating real data.  
+- The two histogram profiles are quite different, and based on our work the model is doing an average job simulating a realistic data that match our original measurente. But, I am conscience on the fact that we are using/and simulating data with few obervations (n=100). I assume that once we start workin with a significantly high number of observations these models should do a better job simulating real data.  
 
