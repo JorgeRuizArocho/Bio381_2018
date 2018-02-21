@@ -117,14 +117,14 @@ str(z)
 
 p2 <- ggplot(data=z, aes(x=myVar, y=..density..)) +
   geom_histogram(color="grey60",fill="cornsilk",size=0.2) 
-p2 <-  p2 +  geom_density(linetype="dotted",size=0.75)
+p2 <-  p2 +  stat
 print(p2)
 ```
 
 ```{r}
 p1 <- ggplot(data=H, aes(x=LA, y=..density..)) +
   geom_histogram(color="grey60",fill="cornsilk",size=0.2) #Here I am assigning my data to a ggplot density graph 
-p1 <-  p1 +  geom_density(linetype="dotted",size=0.75) #Here I am adding an empirical density curve to broadly observe the distribution of our data 
+p1 <-  p1 +  stat #Here I am adding an empirical density curve to broadly observe the distribution of our data 
 print(p1)
 ```
 
