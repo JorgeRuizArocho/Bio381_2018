@@ -5,6 +5,8 @@ date: "2018 M02 21"
 output: html_document
 ---
 
+####Distribution Leaf Area
+
 ```{r}
 z <- read.table("Fake Data Herbivory.csv",header=TRUE,sep=",", stringsAsFactors=FALSE)
 str(z) 
@@ -94,7 +96,7 @@ pSpecial + statSpecial # Plotting a beta probability density plot on my data, bu
 ```
 
 
-
+#### Homework Question Number 5 
 
 1) Using the best-fitting distribution, go back to the code and get the maximum likelihood parameters. Use those to simulate a new data set, with the same length as your original vector, and plot that in a histogram and add the probability density curve. Right below that, generate a fresh histogram plot of the original data, and also include the probability density curve.
 
@@ -128,3 +130,4 @@ print(p1)
 
 
 - The two histogram profiles are quite different, and based on our work the model is not doing a good job simulating a realistic data that match our original measurente. But, I am conscience on the fact that we are using/and simulating data with few obervations (n=100). I assume that once we start workin with a significantly high number of observations these models should do a better job simulating real data.  
+
