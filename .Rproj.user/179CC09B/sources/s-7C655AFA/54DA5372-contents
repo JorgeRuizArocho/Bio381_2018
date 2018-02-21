@@ -94,9 +94,11 @@ pSpecial + statSpecial # Plotting a beta probability density plot on my data, bu
 ```
 
 
+
+
 1) Using the best-fitting distribution, go back to the code and get the maximum likelihood parameters. Use those to simulate a new data set, with the same length as your original vector, and plot that in a histogram and add the probability density curve. Right below that, generate a fresh histogram plot of the original data, and also include the probability density curve.
 
-How do the two histogram profiles compare? Do you think the model is doing a good job of simulating realistic data that match your original measurements? Why or why not?
+2) How do the two histogram profiles compare? Do you think the model is doing a good job of simulating realistic data that match your original measurements? Why or why not?
 
 ```{r}
 normPars$loglik # The normal distribution appears to be the appropiate one (Highest number)
@@ -123,5 +125,6 @@ p1 <- ggplot(data=H, aes(x=LA, y=..density..)) +
 p1 <-  p1 +  geom_density(linetype="dotted",size=0.75) #Here I am adding an empirical density curve to broadly observe the distribution of our data 
 print(p1)
 ```
+
 
 - The two histogram profiles are quite different, and based on our work the model is not doing a good job simulating a realistic data that match our original measurente. But, I am conscience on the fact that we are using/and simulating data with few obervations (n=100). I assume that once we start workin with a significantly high number of observations these models should do a better job simulating real data.  
