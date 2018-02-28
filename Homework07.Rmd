@@ -1,0 +1,141 @@
+---
+title: "Homework07"
+author: "Jorge Ruiz Arocho"
+date: "2018 M02 28"
+output: html_document
+---
+
+#### Creating Fake Data Sets To Explore Hypotheses
+
+```{r}
+library(TeachingDemos)
+library(ggplot2)
+```
+
+##### Specify the sample sizes, means, and variances for each group that would be reasonable if your hypothesis were true.
+
+Ho : leaf area lost by herbivory in cultivated crops = leaf area lost by herbivory in wild ancestors
+Ha : leaf area lost by herbivory in cultivated crops > leaf area lost by herbivory in wild ancestors
+
+```{r}
+n = 300
+HerbCult <- rnorm(n, mean= 18.6, sd= 3) # The mean and sd was selected keeping in mind previous research that suggest that Cultivated crops are suffer from more herbiory in comparison to their wild counterpart. This set of observation  is run on an hypotetical leaf with an area of 30 cm2. 
+HerbWild <- rnorm(n, mean= 13.7, sd= 3)
+head(HerbCult)
+head(HerbWild)
+```
+
+#### Using the methods we have covered in class, write a simple function to create a random data set that has these attributes. Organize these data into a data frame with the appropriate structure.
+
+```{r}
+HerbivoryArea <- function(mean1=18.6, mean2= 13.7, n1 = 300, n2 = 300, sd1 = 3, sd2 = 3) {
+  mydf <- data.frame(Cultivated = rnorm(mean=mean1, n=n1, sd=sd1), Wild = rnorm(n =n2, mean=mean2, sd = sd2))
+  return(mydf)
+} # In this fuction I assing the mean, the sample size and the sd for each group (Wild and Cultivated) and organize it in a data.frame
+
+myDF <- HerbivoryArea(mean1=18.6, mean2 = 13.7)
+head(myDF)
+
+library(reshape2)
+HerbData <- melt(myDF) # Here I am assigning the categories (Cultivated and Wild to a column and paired it with the observe values of leaf herbivory. 
+```
+
+#### Now write a simple function to analyze the data (probably as an ANOVA or regression analysis, but possibly as a logistic regression or contingency table analysis. Write another function to generate a useful graph of the data.
+
+```{r}
+ANOmodel <- aov(value~variable, data=HerbData)
+summary(ANOmodel)
+
+ANOPlot <- ggplot(data=HerbData,
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot()
+print(ANOPlot)
+```
+
+#### Try running your analysis multiple times to get a feeling for how variable the results are with the same parameters, but different sets of random numbers.
+
+``` {r} 
+HerbivoryArea <- function(mean1=18.6, mean2= 13.7, n1 = 300, n2 = 300, sd1 = 3, sd2 = 3) {
+  mydf <- data.frame(Cultivated = rnorm(mean=mean1, n=n1, sd=sd1), Wild = rnorm(n =n2, mean=mean2, sd = sd2))
+  return(mydf)
+}
+
+myDF <- HerbivoryArea(mean1=18.6, mean2 = 13.7)
+head(myDF)
+
+library(reshape2)
+HerbData <- melt(myDF)
+
+
+ANOmodel <- aov(value~variable, data=HerbData)
+summary(ANOmodel)
+
+ANOPlot <- ggplot(data=HerbData,
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot()
+print(ANOPlot) 
+```
+
+``` {r}
+HerbivoryArea <- function(mean1=18.6, mean2= 13.7, n1 = 300, n2 = 300, sd1 = 3, sd2 = 3) {
+  mydf <- data.frame(Cultivated = rnorm(mean=mean1, n=n1, sd=sd1), Wild = rnorm(n =n2, mean=mean2, sd = sd2))
+  return(mydf)
+}
+
+myDF <- HerbivoryArea(mean1=18.6, mean2 = 13.7)
+head(myDF)
+
+library(reshape2)
+HerbData <- melt(myDF)
+
+
+ANOmodel <- aov(value~variable, data=HerbData)
+summary(ANOmodel)
+
+ANOPlot <- ggplot(data=HerbData,
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot()
+print(ANOPlot) # We can observe a variability on the final results based on the generation of different sets of data.
+```
+
+#### Now begin adjusting the means of the different groups. Given the sample sizes you have chosen, how small can the differences between the groups be (the “effect size”) for you to still detect a significant pattern (p < 0.05)
+
+``` {r}
+# HerbivoryArea <- function(mean1=18.6, mean2= 13.7, n1 = 300, n2 = 300, sd1 = 3, sd2 = 3) {
+#  mydf <- data.frame(Cultivated = rnorm(mean=mean1, n=n1, sd=sd1), Wild = rnorm(n =n2, mean=mean2, sd = sd2))
+#  return(mydf)}
+
+myDF <- HerbivoryArea(mean1=13, mean2 = 10) # In this fuction we can change our parameters to see how small the diffeences between the groups can be, in our example a small change in the mean still results in a significat p-value, but if we use relative different means, the chances of obtaining significant p-values increases.
+head(myDF)
+
+library(reshape2)
+HerbData <- melt(myDF)
+
+
+ANOmodel <- aov(value~variable, data=HerbData)
+summary(ANOmodel)
+
+ANOPlot <- ggplot(data=HerbData,
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot()
+print(ANOPlot)
+```
+
+#### Alternatively, for the effect sizes you originally hypothesized, what is the minimum sample size you would need in order to detect a statistically significant effect. Again, run the model a few times with the same parameter set to get a feeling for the effect of random variation in the data.
+
+``` {r}
+# HerbivoryArea <- function(mean1=18.6, mean2= 13.7, n1 = 300, n2 = 300, sd1 = 3, sd2 = 3) {
+#  mydf <- data.frame(Cultivated = rnorm(mean=mean1, n=n1, sd=sd1), Wild = rnorm(n =n2, mean=mean2, sd = sd2))
+#  return(mydf)}
+
+myDF <- HerbivoryArea(n1=50, n2= 50) # In this fuction we can change our parameters to see the minimun sample size needed to observe a statistically significant effect. Again, a large set of observations (n) give us a better chance of obtaining significant p-values.
+head(myDF)
+
+library(reshape2)
+HerbData <- melt(myDF)
+
+
+ANOmodel <- aov(value~variable, data=HerbData)
+summary(ANOmodel)
+
+ANOPlot <- ggplot(data=HerbData,
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot()
+print(ANOPlot)
+```
+
