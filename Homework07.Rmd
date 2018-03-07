@@ -1,7 +1,7 @@
 ---
 title: "Homework07"
 author: "Jorge Ruiz Arocho"
-date: "2018 M02 28"
+date: "2018 M03 07"
 output: html_document
 ---
 
@@ -38,6 +38,8 @@ head(myDF)
 
 library(reshape2)
 HerbData <- melt(myDF) # Here I am assigning the categories (Cultivated and Wild to a column and paired it with the observe values of leaf herbivory. 
+
+head(HerbData)
 ```
 
 #### Now write a simple function to analyze the data (probably as an ANOVA or regression analysis, but possibly as a logistic regression or contingency table analysis. Write another function to generate a useful graph of the data.
@@ -47,7 +49,7 @@ ANOmodel <- aov(value~variable, data=HerbData)
 summary(ANOmodel)
 
 ANOPlot <- ggplot(data=HerbData,
-                  aes(x=variable, y=value, fill=value)) + geom_boxplot()
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot() + ggtitle("Herbivory and Domestication") + ylab("Leaf Area Loss") + xlab("Domestication Stage") 
 print(ANOPlot)
 ```
 
@@ -70,7 +72,7 @@ ANOmodel <- aov(value~variable, data=HerbData)
 summary(ANOmodel)
 
 ANOPlot <- ggplot(data=HerbData,
-                  aes(x=variable, y=value, fill=value)) + geom_boxplot()
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot() + ggtitle("Herbivory and Domestication") + ylab("Leaf Area Loss") + xlab("Domestication Stage")
 print(ANOPlot) 
 ```
 
@@ -91,7 +93,7 @@ ANOmodel <- aov(value~variable, data=HerbData)
 summary(ANOmodel)
 
 ANOPlot <- ggplot(data=HerbData,
-                  aes(x=variable, y=value, fill=value)) + geom_boxplot()
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot() + ggtitle("Herbivory and Domestication") + ylab("Leaf Area Loss") + xlab("Domestication Stage")
 print(ANOPlot) # We can observe a variability on the final results based on the generation of different sets of data.
 ```
 
@@ -102,7 +104,7 @@ print(ANOPlot) # We can observe a variability on the final results based on the 
 #  mydf <- data.frame(Cultivated = rnorm(mean=mean1, n=n1, sd=sd1), Wild = rnorm(n =n2, mean=mean2, sd = sd2))
 #  return(mydf)}
 
-myDF <- HerbivoryArea(mean1=13, mean2 = 10) # In this fuction we can change our parameters to see how small the diffeences between the groups can be, in our example a small change in the mean still results in a significat p-value, but if we use relative different means, the chances of obtaining significant p-values increases.
+myDF <- HerbivoryArea(mean1=13, mean2 = 10) # In this fuction we can change our parameters to see how small the diffeences between the groups can be, in our example a small change in the mean still results in a significat p-value, but if we use relative different means, the chances of obtaining significant p-values increases, but because we are using a random number generator we will obtain different results everything we run the codes. 
 head(myDF)
 
 library(reshape2)
@@ -113,7 +115,7 @@ ANOmodel <- aov(value~variable, data=HerbData)
 summary(ANOmodel)
 
 ANOPlot <- ggplot(data=HerbData,
-                  aes(x=variable, y=value, fill=value)) + geom_boxplot()
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot() + ggtitle("Herbivory and Domestication") + ylab("Leaf Area Loss") + xlab("Domestication Stage")
 print(ANOPlot)
 ```
 
@@ -124,7 +126,8 @@ print(ANOPlot)
 #  mydf <- data.frame(Cultivated = rnorm(mean=mean1, n=n1, sd=sd1), Wild = rnorm(n =n2, mean=mean2, sd = sd2))
 #  return(mydf)}
 
-myDF <- HerbivoryArea(n1=50, n2= 50) # In this fuction we can change our parameters to see the minimun sample size needed to observe a statistically significant effect. Again, a large set of observations (n) give us a better chance of obtaining significant p-values.
+myDF <- HerbivoryArea(n1=50, n2= 50) # In this fuction we can change our parameters to see the minimun sample size needed to observe a statistically significant effect. Again, a large set of observations (n) give us a better chance of obtaining significant p-values, but because we are using a random number generator we will obtain different results everything we run the codes. 
+
 head(myDF)
 
 library(reshape2)
@@ -135,7 +138,13 @@ ANOmodel <- aov(value~variable, data=HerbData)
 summary(ANOmodel)
 
 ANOPlot <- ggplot(data=HerbData,
-                  aes(x=variable, y=value, fill=value)) + geom_boxplot()
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot() + ggtitle("Herbivory and Domestication") + ylab("Leaf Area Loss") + xlab("Domestication Stage") 
 print(ANOPlot)
 ```
 
+#### If you have time, try repeating this exercise with one of the more sophisticated distributions, such as the gamma or negative binomial (depending on the kind of data you have). You will have to spend some time figuring out by trial and error the parameter values you will need to generate appropriate means and variances of the different groups.
+
+```{r}
+
+
+```
