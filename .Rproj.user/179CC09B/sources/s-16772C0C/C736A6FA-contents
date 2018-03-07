@@ -19,7 +19,7 @@ Ha : leaf area lost by herbivory in cultivated crops > leaf area lost by herbivo
 
 ```{r}
 n = 300
-HerbCult <- rnorm(n, mean= 18.6, sd= 3) # The mean and sd was selected keeping in mind previous research that suggest that Cultivated crops are suffer from more herbiory in comparison to their wild counterpart. This set of observation  is run on an hypotetical leaf with an area of 30 cm2. 
+HerbCult <- rnorm(n, mean= 18.6, sd= 3) # The mean and sd was selected keeping in mind previous research that suggest that cultivated crops are more suceptible to suffer from more herbivory in comparison to their wild counterpart. This set of observation is run on an hypotetical leaf with an area of 30 cm2. 
 HerbWild <- rnorm(n, mean= 13.7, sd= 3)
 head(HerbCult)
 head(HerbWild)
@@ -145,6 +145,44 @@ print(ANOPlot)
 #### If you have time, try repeating this exercise with one of the more sophisticated distributions, such as the gamma or negative binomial (depending on the kind of data you have). You will have to spend some time figuring out by trial and error the parameter values you will need to generate appropriate means and variances of the different groups.
 
 ```{r}
+#In Gamma Distributions
+# shape and scale parameters
+# mean = shape*scale
+# variance = shape*scale^2 
 
+n = 300
+HerbCult <- rgamma(n, shape=6, scale = 5)
+HerbWild <- rgamma(n, shape= 2, scale = 3)
 
+# In the last two functions we created a random data set based on a gamma distribution. We select parameter values that goes along with our original hypthesis (cultivated crops are more suceptible to suffer from more herbivory in comparison to their wild counterpart).
+
+head(HerbCult)
+head(HerbWild)
+
+summary(HerbCult)
+summary(HerbWild)
+```
+
+```{r}
+HerbivoryArea <- function(shape1=6, shape2=2, n1 = 300, n2 = 300, scale1 = 5, scale2 = 3) {
+  mydf <- data.frame(Cultivated = rgamma(shape=shape1, n=n1, scale=scale1), Wild = rgamma(shape=shape2, n=n2, scale=scale2))
+  return(mydf)
+} # In this fuction I assing the mean, the sample size and the sd for each group (Wild and Cultivated) and organize it in a data.frame
+
+myDF <- HerbivoryArea(shape1=6, shape2=2)
+head(myDF)
+
+library(reshape2)
+HerbData <- melt(myDF) # Here I am assigning the categories (Cultivated and Wild to a column and paired it with the observe values of leaf herbivory. 
+
+head(HerbData)
+```
+
+```{r}
+ANOmodel <- aov(value~variable, data=HerbData)
+summary(ANOmodel)
+
+ANOPlot <- ggplot(data=HerbData,
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot() + ggtitle("Herbivory and Domestication") + ylab("Leaf Area Loss") + xlab("Domestication Stage") 
+print(ANOPlot)
 ```
