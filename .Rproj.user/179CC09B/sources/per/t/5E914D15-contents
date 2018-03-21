@@ -1,0 +1,140 @@
+---
+title: "Homework09"
+author: "Jorge Ruiz Arocho"
+date: "2018 M03 21"
+output: html_document
+---
+
+##Structured Programming
+
+```{r}
+
+# Preliminary calls 
+
+library(TeachingDemos)
+library(ggplot2)
+
+# Global Variables, we can change this values to visualize diferent conditions. Don't need to change anything else!. 
+
+m1 = 18.6
+m2 = 13.7
+size1 = 300
+size2 = 300
+stdev1 = 3
+stdev2 = 3
+
+#############################################################################
+# FUNCTION: Function and head
+# The function "function" create a function to generate a fake dataset (of normal distribution) for two groups and the function "head" allows us to visualize the first values of that data set.
+# input: normal distribution parameters (means, standard deviations, sample sizes)
+# output: fake data set of n size 
+#----------------------------------------------------------------------------
+
+HerbivoryArea <- function(mean1=m1, mean2=m2, n1=size1, n2=size2, sd1=stdev1, sd2=stdev2){
+  mydf <- data.frame(Cultivated = rnorm(n1,mean1,sd1), Wild = rnorm(n2,mean2,sd2))
+  return(mydf)
+}
+
+myDF <- HerbivoryArea()
+head(myDF)
+
+#############################################################################
+# FUNCTION: Library(reshape2) and melt
+# The functons reshape2 and melt are use to rearrange our dataset into two columns (one categorical and one numerical)
+# input: dataset
+# output: rearrange dataset 
+#----------------------------------------------------------------------------
+
+library(reshape2)
+HerbData <- melt(myDF)
+head(HerbData)
+
+#############################################################################
+# FUNCTION: aov 
+# Conduncting an analysis of variance
+# input: dataset and parameters
+# output: summary of the ANOVA
+#----------------------------------------------------------------------------
+
+ANOmodel <- aov(value~variable, data=HerbData)
+summary(ANOmodel)
+
+#############################################################################
+# FUNCTION: ggplot + geom_boxplot 
+# Creating a boxplot of our two groups
+# input: dataset, variable, value, title and axis
+# output: boxplot
+#----------------------------------------------------------------------------
+
+ANOPlot <- ggplot(data=HerbData,
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot() + ggtitle("Leaf Area Loss vs Domestication Stage") + ylab("Leaf Area Loss") + xlab("Domestication Stage") 
+print(ANOPlot)
+
+```
+
+
+##Now we can modify our global variables and parameters to obtain different results
+
+```{r}
+
+# Preliminary calls 
+
+library(TeachingDemos)
+library(ggplot2)
+
+# Global Variables, we can change this values to visualize diferent conditions. Don't need to change anything else!. 
+
+m1 = 10.5
+m2 = 8.6
+size1 = 75
+size2 = 75
+stdev1 = 3
+stdev2 = 3
+
+#############################################################################
+# FUNCTION: Function and head
+# The function "function" create a function to generate a fake dataset (of normal distribution) for two groups and the function "head" allows us to visualize the first values of that data set.
+# input: normal distribution parameters (means, standard deviations, sample sizes)
+# output: fake data set of n size 
+#----------------------------------------------------------------------------
+
+HerbivoryArea <- function(mean1=m1, mean2=m2, n1=size1, n2=size2, sd1=stdev1, sd2=stdev2){
+  mydf <- data.frame(Cultivated = rnorm(n1,mean1,sd1), Wild = rnorm(n2,mean2,sd2))
+  return(mydf)
+}
+
+myDF <- HerbivoryArea()
+head(myDF)
+
+#############################################################################
+# FUNCTION: Library(reshape2) and melt
+# The functons reshape2 and melt are use to rearrange our dataset into two columns (one categorical and one numerical)
+# input: dataset
+# output: rearrange dataset 
+#----------------------------------------------------------------------------
+
+library(reshape2)
+HerbData <- melt(myDF)
+head(HerbData)
+
+#############################################################################
+# FUNCTION: aov 
+# Conduncting an analysis of variance
+# input: dataset and parameters
+# output: summary of the ANOVA
+#----------------------------------------------------------------------------
+
+ANOmodel <- aov(value~variable, data=HerbData)
+summary(ANOmodel)
+
+#############################################################################
+# FUNCTION: ggplot + geom_boxplot 
+# Creating a boxplot of our two groups
+# input: dataset, variable, value, title and axis
+# output: boxplot
+#----------------------------------------------------------------------------
+
+ANOPlot <- ggplot(data=HerbData,
+                  aes(x=variable, y=value, fill=value)) + geom_boxplot(fill='springgreen3', color="black") + ggtitle("Leaf Area Loss vs Domestication Stage") + ylab("Leaf Area Loss") + xlab("Domestication Stage") 
+print(ANOPlot)
+```
