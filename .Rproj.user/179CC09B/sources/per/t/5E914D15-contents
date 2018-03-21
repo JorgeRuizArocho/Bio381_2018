@@ -25,9 +25,9 @@ stdev2 = 3
 
 #############################################################################
 # FUNCTION: Function and head
-# The function "function" create a function to generate a fake dataset (of normal distribution) for two groups and the function "head" allows us to visualize the first values of that data set.
+# The function "function" create a function to generate a fake dataset (of normal distribution) for two groups and the function "head" allows us to visualize the first values of that dataset.
 # input: normal distribution parameters (means, standard deviations, sample sizes)
-# output: fake data set of n size 
+# output: fake dataset of n size 
 #----------------------------------------------------------------------------
 
 HerbivoryArea <- function(mean1=m1, mean2=m2, n1=size1, n2=size2, sd1=stdev1, sd2=stdev2){
@@ -93,9 +93,9 @@ stdev2 = 3
 
 #############################################################################
 # FUNCTION: Function and head
-# The function "function" create a function to generate a fake dataset (of normal distribution) for two groups and the function "head" allows us to visualize the first values of that data set.
+# The function "function" create a function to generate a fake dataset (of normal distribution) for two groups and the function "head" allows us to visualize the first values of that dataset.
 # input: normal distribution parameters (means, standard deviations, sample sizes)
-# output: fake data set of n size 
+# output: fake dataset of n size 
 #----------------------------------------------------------------------------
 
 HerbivoryArea <- function(mean1=m1, mean2=m2, n1=size1, n2=size2, sd1=stdev1, sd2=stdev2){
@@ -138,4 +138,3 @@ ANOPlot <- ggplot(data=HerbData,
                   aes(x=variable, y=value, fill=value)) + geom_boxplot(fill='springgreen3', color="black") + ggtitle("Leaf Area Loss vs Domestication Stage") + ylab("Leaf Area Loss") + xlab("Domestication Stage") 
 print(ANOPlot)
 ```
-
