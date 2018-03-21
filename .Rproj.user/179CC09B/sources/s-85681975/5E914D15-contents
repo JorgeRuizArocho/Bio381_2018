@@ -138,3 +138,4 @@ ANOPlot <- ggplot(data=HerbData,
                   aes(x=variable, y=value, fill=value)) + geom_boxplot(fill='springgreen3', color="black") + ggtitle("Leaf Area Loss vs Domestication Stage") + ylab("Leaf Area Loss") + xlab("Domestication Stage") 
 print(ANOPlot)
 ```
+
