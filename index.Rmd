@@ -77,3 +77,6 @@ Clarification: I have been unable to knit to a .pdf file and I'm still unable to
 
 ## Homework 9
 [Homework 9 Link](Homework09.html)
+
+## Homework 10
+[Homework 10 Link](Homework10.html)
