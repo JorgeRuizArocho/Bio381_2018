@@ -1,0 +1,163 @@
+---
+title: "Homework11"
+author: "Jorge Ruiz Arocho"
+date: "2018 M04 4"
+output: html_document
+---
+1 - Equation = (N(N-1))/(Sum(n)(n -1)) - Simpson's Diversity Index
+
+```{r}
+# preliminaries
+library(ggplot2)
+library(TeachingDemos)
+char2seed("Cruel April")
+
+###########################
+# Function: SimpsonsDiversityIndex
+# calculating the diversity index base on: 
+# input: N = total nuber of individuals
+#        n = total numbers of individuals of each species
+# output: D = Simspson's Diversity Index
+#--------------------------------
+
+SimpsonsDiversityIndex <- function(N = sample.int(25, 1), 
+                                    n = sample.int(100, 1))
+                                 {
+D <- (N*(N-1))/(sum(n)*(n-1))
+return(D)
+}
+
+SimpsonsDiversityIndex()
+
+```
+
+2 - 
+
+```{r}
+# FUNCTION: readData
+# read in or generate data frame
+# input: Diversity.csv
+# output: 3-column data frame of observed data (ID, x, y)
+
+mydF <- read.csv("Diversity.csv")
+readData <- function(z=NULL) {
+            if(is.null(z)) {
+            xVar=mydF$Species
+            yVar<-mydF$Individuals
+            dF <- data.frame(ID=seq_along(xVar),xVar,yVar) }
+  
+  return(dF)
+}
+readData()  
+```
+
+
+```{r}
+#############################################################################
+# FUNCTION: getMetric
+# calculate metric for randomization test
+# input: column data frame for regression
+# output: regression slope
+#----------------------------------------------------------------------------
+getMetric <- function(z=NULL) {
+  if(is.null(z)) {
+    xVar=mydF$Species
+            yVar<-mydF$Individuals
+    z <- data.frame(ID=seq_along(xVar),xVar,yVar) }
+  
+  . <- lm(z[,3]~z[,2])
+  . <- summary(.)
+  . <- .$coefficients[2,1]
+  slope <- .
+  return(slope)
+  
+}
+getMetric()
+```
+
+  
+```{r}
+#############################################################################
+# FUNCTION: shuffleData
+# randomize data for regression analysis
+# input: data frame (ID,xVar,yVar)
+# output: data frame (ID,xVar,yVar)
+#----------------------------------------------------------------------------
+shuffleData <- function(z=NULL) {
+  if(is.null(z)) {
+   xVar=mydF$Species
+   yVar<-mydF$Individuals
+    z <- data.frame(ID=seq_along(xVar),xVar,yVar) }
+  z[,3] <- sample(z[,3])
+  return(z)
+}
+shuffleData()
+```
+
+
+```{r}
+#############################################################################
+# FUNCTION: getPVal
+# calculate p value for observed, simulated data
+# input: list of observed metric and vector of simulated metric
+# output: lower, upper tail probability vector 
+#----------------------------------------------------------------------------
+getPVal <- function(z=NULL) {
+  if(is.null(z)) {
+   z <- list(xObs = runif(1),xSim = runif(1000)) }
+
+  pLower <- mean(z[[2]] <= z[[1]])
+  pUpper <- mean(z[[2]] >= z[[1]])
+  
+  return(c(pL=pLower, pU=pUpper))
+}
+getPVal()
+```
+
+```{r}
+##################################################################
+# FUNCTION : plotRanTest
+# ggplot raph
+# input: list of observed metrics and vector of siulated metric
+# output: ggplot graph
+#----------------------------------------------------------------
+plotRanTest <- function(z=NULL) {
+  if(is.null(z)) {
+    z <- list(xObs = runif(1),xSim = runif(1000)) }
+  dF <- data.frame(ID=seq_along(z[[2]]), 
+                   simX=z[[2]])
+  p1 <- ggplot(data=dF, mapping=aes(x=simX))
+  p1 + geom_histogram(mapping=aes(fill=I("goldenrod"),color=I("black"))) + geom_vline(aes(xintercept=z[[1]], col = "blue"))
+}
+plotRanTest()
+```
+
+
+```{r}
+#------------------------------------------
+# main body of code
+nSim <- 1000 # number of simulations
+Xsim <- rep(NA,nSim) # will hold simulated slopes
+
+dF <- readData()
+print(dF)
+Xobs <- getMetric(dF)
+Xobs
+
+for (i in seq_len(nSim)) {
+  Xsim[i] <- getMetric(shuffleData(dF))}
+
+slopes <- list(Xobs,Xsim) 
+getPVal(slopes)
+plotRanTest(slopes)
+```
+
+3- 
+```{r}
+aov <- aov(xVar~yVar, data=readData())
+aovShuffle <- aov(xVar~yVar, data=shuffleData())
+summary(aov)
+summary(aovShuffle)
+```
+
+The p-value compare for the standard test versus the p value you estimated from your randomization test are quite similar. But the differences is due to the randomization of the dataset. 
