@@ -2,7 +2,9 @@
 title: "Homework12"
 author: "Jorge Ruiz Arocho"
 date: "2018 M04 11"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 # GGPLOT GRAPHING
