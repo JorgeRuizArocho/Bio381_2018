@@ -1,0 +1,53 @@
+---
+title: "Homework12"
+author: "Jorge Ruiz Arocho"
+date: "2018 M04 11"
+output: html_document
+---
+
+# GGPLOT GRAPHING
+
+```{r}
+library(ggmap)
+library(ggplot2)
+```
+
+
+```{r}
+
+# I will be using an R dataset package named "PREarthquakes", from the University of Puerto Rico, Mayaguez Campus (my previous college). 
+# This dataset includes the location of seismic events of near the island.
+
+PR_Earthquakes = read.table("PREarthquakes.csv", header=TRUE,sep=",", stringsAsFactors=FALSE)
+head(PR_Earthquakes)
+names(PR_Earthquakes)
+str(PR_Earthquakes)
+
+
+# Now we I am going to create a new dataset that only includes the information that 
+# I will be using (the longitude, latitude and the magnitude) for my maps. 
+
+Earthquakes = PR_Earthquakes[c("Longitude", "Latitude", "Magnitude")]
+head(Earthquakes) #To verify we will look to the first part of the data. 
+
+
+PRMap = get_map(location='puerto rico', zoom = 7, maptype = "satellite", source = 'google', color = 'color')
+
+
+#Once the get_map function has found the map I will combine the ggmap package with 
+#the ggplot2 package. 
+
+ggmap(PRMap) + geom_point(aes(x=Longitude, y=Latitude, show_guide = TRUE, colour= Magnitude),
+                  data= Earthquakes, alpha = 0.99, na.rm=TRUE) + scale_color_gradient(low="yellow", high = "red")
+```
+
+
+## Lets change some arguments 
+
+```{r}
+# You can also change the zoom, color of the map, color of magnitude scale, size of the dots
+PRMap2 = get_map(location='puerto rico', zoom = 8, maptype = "satellite", source = 'google', color = 'bw')
+ggmap(PRMap2) + geom_point(aes(x=Longitude, y=Latitude, show_guide = TRUE, colour= Magnitude),
+                  data= Earthquakes, alpha = 0.99, size=3, na.rm=TRUE) + scale_color_gradient(low="green", high = "black") 
+```
+
