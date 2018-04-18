@@ -39,9 +39,9 @@ Have fun!
 * [Homework 6: Probability Distributions](#id-section6) 
 * [Homework 7: Exploring Hypotheses](#id-section7)
 * [Homework 9: Structured Programming](#id-section9)   
-* [Week 10: ](#id-section10)
-* [Week 11: ](#id-section11)
-
+* [Homework 10: Functions Builder](#id-section10)
+* [Homework 11: Function plotting and randomization tests](#id-section11)
+* [Homework 11: ggplot Graphing](#id-section12)
 
 ## Homework Solutions and Notes
 
