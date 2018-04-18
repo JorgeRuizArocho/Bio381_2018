@@ -53,3 +53,11 @@ ggmap(PRMap2) + geom_point(aes(x=Longitude, y=Latitude, show_guide = TRUE, colou
                   data= Earthquakes, alpha = 0.99, size=3, na.rm=TRUE) + scale_color_gradient(low="green", high = "black") 
 ```
 
+
+## Now we can create other types of graphs
+
+```{r}
+b1 <- ggplot(data=PR_Earthquakes, mapping=aes(x=Felt,y=Magnitude, group=Felt, color=Region)) + 
+  geom_boxplot() + geom_point(position=position_jitter(width = 0.2, height = 0.7))
+print(b1)
+```
