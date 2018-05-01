@@ -128,6 +128,10 @@
 <h2>Homework 12</h2>
 <p><a href="Homework12.html">Homework 12 Link</a></p>
 </div>
+<div id="agricolae-package" class="section level2">
+<h2>Agricolae Package</h2>
+<p><a href="Agricolae%20Package.Rmd">Markdown</a> <a href="Agricolae_Package.html">html</a></p>
+</div>
 </section>
 
 
