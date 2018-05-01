@@ -24,14 +24,14 @@ x<-seq(25,60,5)
 y<-c(2,6,9,7,3,1)
 ```
 
-### Poligon and frecuency
+### Example of graphs using agricolae
 ```{r}
 h<-graph.freq(x,counts=y,col=colors()[65],xlab=" ", ylab="Frequency",
               axes=FALSE)
 axis(1,x,las=2)
 axis(2,0:10)
 polygon.freq(h,col="red",xlab=" ", ylab="")
-title( main="Histogram and polygon", xlab="Variable X")
+title(main="Histogram and polygon", xlab="Variable X")
 # Imagine that we have other variables to graph
 axis(4,0:10) 
 ```
@@ -49,7 +49,7 @@ outdesign <-design.rcbd(treatments,
                                                          # kinds = method for to randomize
 outdesign
 RCBD <- outdesign$book
-RCBD # field book
+RCBD 
 
 Sketch <- outdesign$sketch
 Sketch
@@ -64,12 +64,6 @@ print(LSD) # field book.
 
 plots <-as.numeric(LSD[,1])
 print(matrix(plots,byrow = TRUE, ncol = 4))
-
-
-# Write on hard disk.
-write.table(LSD,"lsd.txt", row.names=FALSE, sep="\t")
-file.show("lsd.txt")
-
 
 # Several design options are accompanied by complementary analysis functions
 
