@@ -174,4 +174,11 @@ model<-AMMI(Environment, Genotype, REP, Yield, MSerror)
 plot(model)
 AMMI.contour(model,distance=0.80,shape=8,col="red",lwd=2,lty=5)
 ```
-#############################################################################################################
+
+#### References
+
+##### De Mendiburu, F., & Simon, R. (2015). Agricolae-Ten years of an open source statistical tool for experiments in breeding, agriculture and biology. PeerJ PrePrints.
+
+##### https://cran.r-project.org/web/packages/agricolae/index.html
+
+##### https://www.rdocumentation.org/packages/agricolae/versions/1.2-8
