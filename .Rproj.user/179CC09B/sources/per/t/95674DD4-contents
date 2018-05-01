@@ -12,25 +12,30 @@ library(agricolae)
 
 ### Open datasets from 'agricolae' 
 ```{r}
-data(sweetpotato) 
+data(sweetpotato) # rx is a numeric vector 
 data(corn)
-head(corn) # a numeric vector
+
+head(corn) 
+head(sweetpotato)
+
 str(corn)
+str(sweetpotato)
 ```
 
 ### Some basic functions 
 ```{r}
-x<-seq(25,60,5)
-y<-c(2,6,9,7,3,1)
+# Creating our variables
+x <-seq(25,65,5)
+y <-c(2,6,9,7,3,1)
 ```
 
 ### Example of graphs using agricolae
 ```{r}
-h<-graph.freq(x,counts=y,col=colors()[65],xlab=" ", ylab="Frequency",
+graph <-graph.freq(x,counts = y,col=colors()[65],xlab=" ", ylab="Frequency",
               axes=FALSE)
-axis(1,x,las=2)
+axis(1,x)
 axis(2,0:10)
-polygon.freq(h,col="red",xlab=" ", ylab="")
+polygon.freq(graph,col="red",xlab=" ", ylab="")
 title(main="Histogram and polygon", xlab="Variable X")
 # Imagine that we have other variables to graph
 axis(4,0:10) 
@@ -40,13 +45,14 @@ axis(4,0:10)
 #### 4 treatments and 5 blocks
 ```{r}
 treatments<-c("H","O","P","E")
+repetition <- 4
 
 # Generating Randomized Complete Block Design (standard design for agricultural experiments. The field or orchard is divided into units to account for any variation in the field. Treatments are then assigned at random to the subjects in the blocks-once in each block.)
 
 outdesign <-design.rcbd(treatments,
-                        r = 5,serie=2,
-                        seed = 45,kinds = "Super-Duper") # Arguments -> r = Replications or blocks, series = number plot,
-                                                         # kinds = method for to randomize
+                        r = repetition,serie=2,
+                        seed = 513,kinds = "Super-Duper") # Arguments -> r = Replications or blocks, serie = number plot, # kinds = method for to randomize
+
 outdesign
 RCBD <- outdesign$book
 RCBD 
@@ -57,20 +63,22 @@ Sketch
 # Generating Latin Square Design (The Latin square design is used where the researcher desires to control the variation in an experiment that is related to rows and columns in the field.)
 
 varieties<-c("green","blue","white","red")
-outdesign <-design.lsd(varieties,serie=2,seed=23)
+outdesign <-design.lsd(varieties,serie=2,seed=540)
 LSD <- outdesign$book 
 print(outdesign$sketch)
 print(LSD) # field book.
 
-plots <-as.numeric(LSD[,1])
-print(matrix(plots,byrow = TRUE, ncol = 4))
+books <-as.numeric(LSD[,1])
+print(matrix(books,byrow = TRUE, ncol = 4))
 
 # Several design options are accompanied by complementary analysis functions
 
-Genotype<-paste("geno",1:30,sep="") # the number of treatments must be multiple of k (size block) 
+#Alpha designs
+Treatment <-paste("treatment",1:30,sep="") # the number of treatments must be multiple of k (size block) 
 r<- 2 # replication
 k<- 3 # block size
-plan_alpha <- design.alpha(Genotype,k,r,seed=5)
+outdesign <-design.alpha(Treatment,k,r,seed=543)
+
 ```
 
 ### Agricolae allows you to conduct a bunch of multiple parametric and non-paprametric comparisons. 
@@ -172,3 +180,5 @@ AMMI.contour(model,distance=0.80,shape=8,col="red",lwd=2,lty=5)
 ##### https://cran.r-project.org/web/packages/agricolae/index.html
 
 ##### https://www.rdocumentation.org/packages/agricolae/versions/1.2-8
+
+##### http://tarwi.lamolina.edu.pe/~fmendiburu/
