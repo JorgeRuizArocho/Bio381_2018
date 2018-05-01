@@ -5,11 +5,6 @@ date: "2018 M04 25"
 output: html_document
 ---
 
-#### PACKAGE PRESENTATION ####
-# AGRICOLAE
-# BY Jorge A Ruiz-Arocho
-# May 2, 2018
-
 # Preliminaries
 ```{r}
 library(agricolae) 
