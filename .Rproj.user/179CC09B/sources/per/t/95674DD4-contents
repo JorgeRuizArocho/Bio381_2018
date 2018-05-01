@@ -20,13 +20,13 @@ str(corn)
 
 ### Some basic functions 
 ```{r}
-x<-seq(10,40,5)
-y<-c(2,6,8,7,3,4)
+x<-seq(25,60,5)
+y<-c(2,6,9,7,3,1)
 ```
 
 ### Poligon and frecuency
 ```{r}
-h<-graph.freq(x,counts=y,col=colors()[86],xlab=" ", ylab="Frequency",
+h<-graph.freq(x,counts=y,col=colors()[65],xlab=" ", ylab="Frequency",
               axes=FALSE)
 axis(1,x,las=2)
 axis(2,0:10)
@@ -39,34 +39,35 @@ axis(4,0:10)
 ### Experimental designs
 #### 4 treatments and 5 blocks
 ```{r}
-trt<-c("A","B","C","D")
+treatments<-c("H","O","P","E")
 
 # Generating Randomized Complete Block Design (standard design for agricultural experiments. The field or orchard is divided into units to account for any variation in the field. Treatments are then assigned at random to the subjects in the blocks-once in each block.)
 
-outdesign <-design.rcbd(trt,
+outdesign <-design.rcbd(treatments,
                         r = 5,serie=2,
                         seed = 45,kinds = "Super-Duper") # Arguments -> r = Replications or blocks, series = number plot,
                                                          # kinds = method for to randomize
 outdesign
-rcbd <- outdesign$book
-rcbd # field book
+RCBD <- outdesign$book
+RCBD # field book
 
-sketch <- outdesign$sketch
-sketch
+Sketch <- outdesign$sketch
+Sketch
 
 # Generating Latin Square Design (The Latin square design is used where the researcher desires to control the variation in an experiment that is related to rows and columns in the field.)
 
 varieties<-c("green","blue","white","red")
 outdesign <-design.lsd(varieties,serie=2,seed=23)
-lsd <- outdesign$book 
+LSD <- outdesign$book 
 print(outdesign$sketch)
-print(lsd) # field book.
-plots <-as.numeric(lsd[,1])
+print(LSD) # field book.
+
+plots <-as.numeric(LSD[,1])
 print(matrix(plots,byrow = TRUE, ncol = 4))
 
 
 # Write on hard disk.
-write.table(lsd,"lsd.txt", row.names=FALSE, sep="\t")
+write.table(LSD,"lsd.txt", row.names=FALSE, sep="\t")
 file.show("lsd.txt")
 
 
@@ -114,12 +115,12 @@ agricolaeTukey
 data(sweetpotato)
 model<-aov(yield~virus,data=sweetpotato)
 out <- waller.test(model,"virus", console=TRUE,
-                   main="Yield of sweetpotato\ndealt with different virus")
+                   main="Yield of sweetpotato with different virus")
 
 bar.err(out$means,variation="SE",horiz=TRUE,xlim=c(0,45),
         bar=FALSE,col=0)
-bar.err(out$means,variation="range",ylim=c(0,45),bar=FALSE,col="grey",
-        main="range")
+bar.err(out$means,variation="range",ylim=c(0,45),bar=FALSE,col="light blue",
+        main="Range")
 ```
 
 ### Stability analysis
@@ -129,30 +130,25 @@ bar.err(out$means,variation="range",ylim=c(0,45),bar=FALSE,col="grey",
 ```{r}
 options(digit=2)
 
-v1 <- c(10.2,8.8,8.8,9.3,9.6,7.2,8.4,9.6,7.9,10,9.3,8.0,10.1,9.4,10.8,
-        6.3,7.4)
-v2 <- c(7,7.8,7.0,6.9,7,8.3,7.4,6.5,6.8,7.9,7.3,6.8,8.1,7.1,7.1,6.4,
-        4.1)
-v3 <- c(5.3,4.4,5.3,4.4,5.5,4.6,6.2,6.0,6.5,5.3,5.7,4.4,4.2,5.6,5.8,
-        3.9,3.8)
-v4 <- c(7.8,5.9,7.3,5.9,7.8,6.3,7.9,7.5,7.6,5.4,5.6,7.8,6.5,8.1,7.5,
-        5.0,5.4)
-v5 <-c(9,9.2,8.8,10.6,8.3,9.3,9.6,8.8,7.9,9.1,7.7,9.5,9.4,9.4,10.3,
-       8.8,8.7)
+v1 <- c(10.2,8.8,8.8,9.3,9.6,7.2,8.4,9.6,7.9,5.8)
+v2 <- c(7.8,7.0,6.9,7,8.3,7.4,6.5,6.8,7.9,9.8)
+v3 <- c(5.3,4.4,5.3,4.4,5.5,4.6,6.2,6.0,6.5,5.3)
+v4 <- c(7.8,5.9,7.3,5.9,7.8,6.3,7.9,7.5,7.6,5.4)
+v5 <-c(9,9.2,8.8,10.6,8.3,9.3,9.6,8.8,7.9,9.1)
 
 study <- data.frame(v1, v2, v3, v4, v5)
-rownames(study) <- LETTERS[1:17]
+rownames(study) <- LETTERS[1:10]
 study # We assigned letters to each component of each vector
 
 output <- stability.par(study, rep=4, MSerror=2)# This procedure calculates the stability variations as well as the statistics of selection for the yield and the stability. The averages of the genotype through the different environment repetitions are required for the calculations. The mean square error must be calculated from the joint variance analysis.
 
-altitude<-c(1200, 1300, 800, 1600, 2400)
+altitude<-c(900, 1000, 800, 1500, 2200)
 stability <- stability.par(study,rep=4,MSerror=2, cova=TRUE,
                            name.cov= "altitude",
                            file.cov=altitude)
 
 rdto <- c(study[,1], study[,2], study[,3], study[,4], study[,5])
-environment <- gl(5,17) 
+environment <- gl(5,10) 
 
 genotype <- rep(rownames(study),5)
 model<-AMMI(ENV=environment, GEN=genotype, REP=4, Y=rdto, MSE=2,
@@ -168,7 +164,7 @@ Environment <- sinRepAmmi$ENV
 Genotype <- sinRepAmmi$GEN
 Yield <- sinRepAmmi$YLD
 REP <- 3
-MSerror <- 93.24224
+MSerror <- 85.5
 model<-AMMI(Environment, Genotype, REP, Yield, MSerror)
 
 plot(model)
