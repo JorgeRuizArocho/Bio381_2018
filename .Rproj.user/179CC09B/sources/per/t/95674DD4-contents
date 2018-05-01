@@ -5,12 +5,12 @@ date: "2018 M04 25"
 output: html_document
 ---
 
-# Preliminaries
+### Preliminaries
 ```{r}
 library(agricolae) 
 ```
 
-# Open datasets from 'agricolae' 
+### Open datasets from 'agricolae' 
 ```{r}
 data(sweetpotato) 
 data(corn)
@@ -18,13 +18,13 @@ head(corn) # a numeric vector
 str(corn)
 ```
 
-# Some basic functions 
+### Some basic functions 
 ```{r}
 x<-seq(10,40,5)
 y<-c(2,6,8,7,3,4)
 ```
 
-# Poligon and frecuency
+### Poligon and frecuency
 ```{r}
 h<-graph.freq(x,counts=y,col=colors()[86],xlab=" ", ylab="Frequency",
               axes=FALSE)
@@ -36,8 +36,8 @@ title( main="Histogram and polygon", xlab="Variable X")
 axis(4,0:10) 
 ```
 
-## Experimental designs
-# 4 treatments and 5 blocks
+### Experimental designs
+#### 4 treatments and 5 blocks
 ```{r}
 trt<-c("A","B","C","D")
 
@@ -78,11 +78,11 @@ k<- 3 # block size
 plan_alpha <- design.alpha(Genotype,k,r,seed=5)
 ```
 
-# Agricolae allows you to conduct a bunch of multiple parametric and non-paprametric comparisons. 
-# Parametric comparisons (e.g. Difference test (HSD.test()), the Duncan test (duncan.test()), the Scheffe test (scheffe.test()), among others) 
+### Agricolae allows you to conduct a bunch of multiple parametric and non-paprametric comparisons. 
+### Parametric comparisons (e.g. Difference test (HSD.test()), the Duncan test (duncan.test()), the Scheffe test (scheffe.test()), among others) 
 
-# Non-Parametric comparisons (e.g. kruskal(), waerden.test(), friedman() and durbin.test()). 
-# An important noteto avoid possible confusion: R itself provides the functions kruskal.test() and friedman.test() - these report only a single value; whereas the functions provided by agricolae perform multiple comparisons
+### Non-Parametric comparisons (e.g. kruskal(), waerden.test(), friedman() and durbin.test()). 
+### An important note to avoid possible confusion: R itself provides the functions kruskal.test() and friedman.test() - these report only a single value; whereas the functions provided by agricolae perform multiple comparisons
 ```{r}
 data(corn)
 kruskal.test(corn$observation, corn$method)
@@ -109,7 +109,7 @@ agricolaeTukey= HSD.test(Potato, "virus", group = FALSE, main = "Yield of sweet 
 agricolaeTukey
 ```
 
-# Graphs for multiple comparisons
+### Graphs for multiple comparisons
 ```{r}
 data(sweetpotato)
 model<-aov(yield~virus,data=sweetpotato)
@@ -122,10 +122,10 @@ bar.err(out$means,variation="range",ylim=c(0,45),bar=FALSE,col="grey",
         main="range")
 ```
 
-# Stability analysis
-##AMMI
+### Stability analysis
+####  AMMI
 
-# Significant interaction exists when the first two component terms of a principal component analysis sum to more than 50%. I provide the function plot.AMMI() to visualize the interaction. The parameter type specifies if a biplot or triplot is created.
+### Significant interaction exists when the first two component terms of a principal component analysis sum to more than 50%. I provide the function plot.AMMI() to visualize the interaction. The parameter type specifies if a biplot or triplot is created.
 ```{r}
 options(digit=2)
 
