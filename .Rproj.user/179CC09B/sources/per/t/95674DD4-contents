@@ -130,8 +130,6 @@ bar.err(out$means,variation="range",ylim=c(0,45),bar=FALSE,col="light blue",
 
 ### Significant interaction exists when the first two component terms of a principal component analysis sum to more than 50%. I provide the function plot.AMMI() to visualize the interaction. The parameter type specifies if a biplot or triplot is created.
 ```{r}
-options(digit=2)
-
 v1 <- c(10.2,8.8,8.8,9.3,9.6,7.2,8.4,9.6,7.9,5.8)
 v2 <- c(7.8,7.0,6.9,7,8.3,7.4,6.5,6.8,7.9,9.8)
 v3 <- c(5.3,4.4,5.3,4.4,5.5,4.6,6.2,6.0,6.5,5.3)
@@ -143,11 +141,7 @@ rownames(study) <- LETTERS[1:10]
 study # We assigned letters to each component of each vector
 
 output <- stability.par(study, rep=4, MSerror=2)# This procedure calculates the stability variations as well as the statistics of selection for the yield and the stability. The averages of the genotype through the different environment repetitions are required for the calculations. The mean square error must be calculated from the joint variance analysis.
-
-altitude<-c(900, 1000, 800, 1500, 2200)
-stability <- stability.par(study,rep=4,MSerror=2, cova=TRUE,
-                           name.cov= "altitude",
-                           file.cov=altitude)
+output
 
 rdto <- c(study[,1], study[,2], study[,3], study[,4], study[,5])
 environment <- gl(5,10) 
